@@ -1,13 +1,27 @@
 import React, { useState } from 'react'
-import { initialItems } from '../initialItems'
-const From = () => {
+// import { initialItems } from '../initialItems'
+const From = ({handAddleItems}) => {
     const [description,setDescription] = useState("")
     const [quantity,setQuantity] = useState(1)
-    const [myinitialItems,setMyinitialItems]=useState(initialItems);
 
-    const handleInput = (e)=>{
+    /*
+
+    this state has been lifted to the parent component then it has been pass as props to the needy child 
+    
+    it becomes very easy to pass the state from parent to child component
+
+    and i also learned the how to use the state lifting state up , it is the very important concept in the react 
+
+    const [items,setItems]=useState([]);
+    const handleItems = (item)=>{
+            setItems((prevItems)=>{
+                    return [...prevItems,item];
+                })
+            }
+    */
+            
+            const handleInput = (e)=>{
         setDescription(e.target.value);
-        // console.log(description)
     }
 
     const handleSelectValueChange = (e)=>{
@@ -20,10 +34,9 @@ const From = () => {
             return;
         }
         const newItem = {id:Date.now(),description:description,quantity:quantity,packed:false}
-        setMyinitialItems((prev)=>{
-            return [...prev ,newItem]
-        })
-        console.log(myinitialItems)
+        console.log(newItem)
+        handAddleItems(newItem)
+        // console.log(myinitialItems)
         setDescription("")
         setQuantity(1)
     }
